@@ -4,6 +4,7 @@ import { Search, Calculator, Menu, Car, Bell, User, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface NavigationProps {
   onSearchChange: (query: string) => void;
@@ -12,6 +13,7 @@ interface NavigationProps {
 
 export const Navigation = ({ onSearchChange, onShowCalculator }: NavigationProps) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const isMobile = useIsMobile();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -52,25 +54,29 @@ export const Navigation = ({ onSearchChange, onShowCalculator }: NavigationProps
           </div>
 
           {/* Search Bar */}
-          <div className="flex-1 max-w-md mx-8">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search cars, brands, or dealerships..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="pl-10 bg-background/50 border-border focus:bg-background focus:border-orange transition-all duration-300"
-              />
+          {!isMobile && (
+            <div className="flex-1 max-w-md mx-8">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search cars, brands, or dealerships..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="pl-10 bg-background/50 border-border focus:bg-background focus:border-orange transition-all duration-300"
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-3">
-            <Button variant="orange" size="sm" className="hidden md:flex">
-              <Plus className="w-4 h-4 mr-2" />
-              Post Car
-            </Button>
+            {!isMobile && (
+              <Button variant="orange" size="sm">
+                <Plus className="w-4 h-4 mr-2" />
+                Post Car
+              </Button>
+            )}
 
             {/* Notifications */}
             <Button variant="ghost" size="icon" className="relative text-foreground hover:text-orange">
