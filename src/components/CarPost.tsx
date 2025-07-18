@@ -1,4 +1,5 @@
-import { Heart, MapPin, Calendar, Fuel, Settings, Eye, MessageCircle, Share2 } from 'lucide-react';
+
+import { Heart, MapPin, Calendar, Fuel, Settings, Eye, MessageCircle, Share2, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -52,12 +53,12 @@ export const CarPost = ({
   };
 
   return (
-    <Card className="overflow-hidden bg-gradient-card border-border/50 shadow-elegant hover:shadow-premium transition-all duration-300">
+    <Card className="overflow-hidden bg-card border-border shadow-elegant hover:shadow-premium transition-all duration-300">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">
+            <div className="w-12 h-12 bg-gradient-orange rounded-full flex items-center justify-center shadow-orange-glow">
+              <span className="text-orange-foreground font-bold text-lg">
                 {dealership.name.charAt(0)}
               </span>
             </div>
@@ -65,7 +66,8 @@ export const CarPost = ({
               <div className="flex items-center space-x-2">
                 <h3 className="font-semibold text-foreground">{dealership.name}</h3>
                 {dealership.verified && (
-                  <Badge variant="secondary" className="text-xs bg-accent/20 text-accent-foreground">
+                  <Badge className="text-xs bg-blue-600 text-white border-blue-600 flex items-center gap-1">
+                    <CheckCircle className="w-3 h-3" />
                     Verified
                   </Badge>
                 )}
@@ -89,12 +91,12 @@ export const CarPost = ({
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-4 left-4">
-            <Badge className="bg-background/90 text-foreground border-border/50">
+            <Badge className="bg-background/90 text-foreground border-border">
               {car.year}
             </Badge>
           </div>
           <div className="absolute top-4 right-4">
-            <Badge variant="secondary" className="bg-accent text-accent-foreground font-bold">
+            <Badge className="bg-orange text-orange-foreground font-bold shadow-orange-glow">
               {formatPrice(car.price)}
             </Badge>
           </div>
@@ -110,50 +112,50 @@ export const CarPost = ({
           {/* Specs Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
             <div className="flex items-center space-x-2 text-sm">
-              <Calendar className="w-4 h-4 text-muted-foreground" />
+              <Calendar className="w-4 h-4 text-orange" />
               <span className="text-foreground">{formatMileage(car.mileage)}</span>
             </div>
             <div className="flex items-center space-x-2 text-sm">
-              <Fuel className="w-4 h-4 text-muted-foreground" />
+              <Fuel className="w-4 h-4 text-orange" />
               <span className="text-foreground">{car.fuelType}</span>
             </div>
             <div className="flex items-center space-x-2 text-sm">
-              <Settings className="w-4 h-4 text-muted-foreground" />
+              <Settings className="w-4 h-4 text-orange" />
               <span className="text-foreground">{car.transmission}</span>
             </div>
             <div className="flex items-center space-x-2 text-sm">
-              <div className="w-4 h-4 rounded-full bg-muted border-2 border-border" />
+              <div className="w-4 h-4 rounded-full bg-orange border-2 border-orange-light" />
               <span className="text-foreground">{car.color}</span>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-4 border-t border-border/50">
+        <div className="flex items-center justify-between pt-4 border-t border-border">
           <div className="flex items-center space-x-4">
             <Button variant="ghost" size="sm" onClick={onLike} className="text-muted-foreground hover:text-red-500">
               <Heart className="w-4 h-4 mr-1" />
               {likes}
             </Button>
-            <Button variant="ghost" size="sm" className="text-muted-foreground">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
               <MessageCircle className="w-4 h-4 mr-1" />
               Comment
             </Button>
-            <Button variant="ghost" size="sm" className="text-muted-foreground">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
               <Share2 className="w-4 h-4 mr-1" />
               Share
             </Button>
-            <Button variant="ghost" size="sm" className="text-muted-foreground">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
               <Eye className="w-4 h-4 mr-1" />
               View Details
             </Button>
           </div>
 
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm" onClick={onFinance}>
+            <Button variant="orange-outline" size="sm" onClick={onFinance}>
               Finance
             </Button>
-            <Button variant="premium" size="sm" onClick={onBook}>
+            <Button variant="orange" size="sm" onClick={onBook} className="shadow-orange-glow">
               Book Test Drive
             </Button>
           </div>

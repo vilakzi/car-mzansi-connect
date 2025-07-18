@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { CarPost } from '@/components/CarPost';
@@ -126,7 +127,7 @@ const Index = () => {
           <Button 
             variant="ghost" 
             onClick={() => setShowCalculator(false)}
-            className="mb-6"
+            className="mb-6 text-foreground hover:text-orange"
           >
             ← Back to Feed
           </Button>
@@ -147,25 +148,25 @@ const Index = () => {
       <section className="relative h-96 overflow-hidden">
         <img
           src={heroImage}
-          alt="Car Mzansi_Ride Hero"
+          alt="Car Mzansi Ride Hero"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl">
-              <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-4">
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
                 Car Mzansi
-                <span className="block text-accent">RIDE HUB</span>
+                <span className="block text-orange font-bold">RIDE HUB</span>
               </h1>
-              <p className="text-xl text-primary-foreground/90 mb-8">
+              <p className="text-xl text-foreground/90 mb-8">
                 South Africa's premier social platform for car enthusiasts, dealerships, and buyers.
               </p>
               <div className="flex gap-4">
-                <Button variant="premium" size="lg">
+                <Button variant="orange" size="lg" className="shadow-orange-glow">
                   Browse Cars
                 </Button>
-                <Button variant="hero" size="lg">
+                <Button variant="orange-outline" size="lg">
                   Join Dealership
                 </Button>
               </div>
@@ -175,36 +176,36 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 border-b border-border/50">
+      <section className="py-12 border-b border-border">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <Card className="bg-gradient-card border-border/50 text-center shadow-elegant hover:shadow-premium transition-all duration-300">
+            <Card className="bg-card border-border text-center shadow-elegant hover:shadow-premium transition-all duration-300">
               <CardContent className="p-6">
-                <Car className="w-8 h-8 text-primary mx-auto mb-2" />
+                <Car className="w-8 h-8 text-orange mx-auto mb-2" />
                 <div className="text-2xl font-bold text-foreground">2,500+</div>
                 <div className="text-sm text-muted-foreground">Cars Listed</div>
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-card border-border/50 text-center shadow-elegant hover:shadow-premium transition-all duration-300">
+            <Card className="bg-card border-border text-center shadow-elegant hover:shadow-premium transition-all duration-300">
               <CardContent className="p-6">
-                <Users className="w-8 h-8 text-accent mx-auto mb-2" />
+                <Users className="w-8 h-8 text-orange mx-auto mb-2" />
                 <div className="text-2xl font-bold text-foreground">150+</div>
                 <div className="text-sm text-muted-foreground">Dealerships</div>
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-card border-border/50 text-center shadow-elegant hover:shadow-premium transition-all duration-300">
+            <Card className="bg-card border-border text-center shadow-elegant hover:shadow-premium transition-all duration-300">
               <CardContent className="p-6">
-                <TrendingUp className="w-8 h-8 text-primary-glow mx-auto mb-2" />
+                <TrendingUp className="w-8 h-8 text-orange mx-auto mb-2" />
                 <div className="text-2xl font-bold text-foreground">98%</div>
                 <div className="text-sm text-muted-foreground">Satisfaction</div>
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-card border-border/50 text-center shadow-elegant hover:shadow-premium transition-all duration-300">
+            <Card className="bg-card border-border text-center shadow-elegant hover:shadow-premium transition-all duration-300">
               <CardContent className="p-6">
-                <Star className="w-8 h-8 text-accent mx-auto mb-2" />
+                <Star className="w-8 h-8 text-orange mx-auto mb-2" />
                 <div className="text-2xl font-bold text-foreground">4.8/5</div>
                 <div className="text-sm text-muted-foreground">Rating</div>
               </CardContent>
