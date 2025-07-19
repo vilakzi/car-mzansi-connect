@@ -9,14 +9,14 @@ interface WishlistButtonProps {
   carId: string;
   isInWishlist?: boolean;
   variant?: 'default' | 'icon';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'default' | 'lg';
 }
 
 export const WishlistButton = ({ 
   carId, 
   isInWishlist = false, 
   variant = 'default',
-  size = 'md'
+  size = 'default'
 }: WishlistButtonProps) => {
   const [isWishlisted, setIsWishlisted] = useState(isInWishlist);
   const [isLoading, setIsLoading] = useState(false);
