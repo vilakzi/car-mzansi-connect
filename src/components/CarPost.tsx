@@ -1,8 +1,9 @@
 
-import { Heart, MapPin, Calendar, Fuel, Settings, Eye, MessageCircle, Share2, CheckCircle } from 'lucide-react';
+import { Heart, MapPin, Calendar, Fuel, Settings, Eye, MessageCircle, Share2, CheckCircle, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { WishlistButton } from '@/components/wishlist/WishlistButton';
 
 interface CarPostProps {
   id: string;
@@ -25,20 +26,27 @@ interface CarPostProps {
   description: string;
   postedAt: string;
   likes: number;
+  rating?: number;
+  reviewCount?: number;
   onLike: () => void;
   onBook: () => void;
   onFinance: () => void;
+  onWriteReview?: () => void;
 }
 
 export const CarPost = ({
+  id,
   dealership,
   car,
   description,
   postedAt,
   likes,
+  rating = 0,
+  reviewCount = 0,
   onLike,
   onBook,
   onFinance,
+  onWriteReview,
 }: CarPostProps) => {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-ZA', {
@@ -50,6 +58,17 @@ export const CarPost = ({
 
   const formatMileage = (mileage: number) => {
     return `${mileage.toLocaleString('en-ZA')} km`;
+  };
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`w-4 h-4 ${
+          i < rating ? 'fill-orange text-orange' : 'text-muted-foreground'
+        }`}
+      />
+    ));
   };
 
   return (
@@ -78,7 +97,10 @@ export const CarPost = ({
               </div>
             </div>
           </div>
-          <span className="text-sm text-muted-foreground">{postedAt}</span>
+          <div className="flex items-center space-x-2">
+            <WishlistButton carId={id} variant="icon" />
+            <span className="text-sm text-muted-foreground">{postedAt}</span>
+          </div>
         </div>
       </CardHeader>
 
@@ -104,9 +126,21 @@ export const CarPost = ({
 
         {/* Car Details */}
         <div>
-          <h2 className="text-2xl font-bold text-foreground mb-2">
-            {car.make} {car.model}
-          </h2>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-2xl font-bold text-foreground">
+              {car.make} {car.model}
+            </h2>
+            {rating > 0 && (
+              <div className="flex items-center space-x-1">
+                <div className="flex items-center">
+                  {renderStars(Math.round(rating))}
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  {rating.toFixed(1)} ({reviewCount} reviews)
+                </span>
+              </div>
+            )}
+          </div>
           <p className="text-muted-foreground mb-4">{description}</p>
 
           {/* Specs Grid */}
@@ -141,6 +175,17 @@ export const CarPost = ({
               <MessageCircle className="w-4 h-4 mr-1" />
               Comment
             </Button>
+            {onWriteReview && (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onWriteReview}
+                className="text-muted-foreground hover:text-orange"
+              >
+                <Star className="w-4 h-4 mr-1" />
+                Review
+              </Button>
+            )}
             <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
               <Share2 className="w-4 h-4 mr-1" />
               Share
