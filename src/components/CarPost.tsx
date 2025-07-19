@@ -1,9 +1,9 @@
-
-import { Heart, MapPin, Calendar, Fuel, Settings, Eye, MessageCircle, Share2, CheckCircle, Star } from 'lucide-react';
+import { Heart, MapPin, Calendar, Fuel, Settings, Eye, MessageCircle, Share2, CheckCircle, Star, FileText, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { WishlistButton } from '@/components/wishlist/WishlistButton';
+import { openWhatsApp, generateCarInquiryMessage } from '@/utils/whatsapp';
 
 interface CarPostProps {
   id: string;
@@ -11,6 +11,7 @@ interface CarPostProps {
     name: string;
     location: string;
     verified: boolean;
+    whatsapp?: string;
   };
   car: {
     make: string;
@@ -32,6 +33,7 @@ interface CarPostProps {
   onBook: () => void;
   onFinance: () => void;
   onWriteReview?: () => void;
+  onApply?: () => void;
 }
 
 export const CarPost = ({
@@ -47,6 +49,7 @@ export const CarPost = ({
   onBook,
   onFinance,
   onWriteReview,
+  onApply,
 }: CarPostProps) => {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-ZA', {
@@ -69,6 +72,13 @@ export const CarPost = ({
         }`}
       />
     ));
+  };
+
+  const handleWhatsAppClick = () => {
+    if (dealership.whatsapp) {
+      const message = generateCarInquiryMessage(car, dealership);
+      openWhatsApp(dealership.whatsapp, message);
+    }
   };
 
   return (
@@ -197,6 +207,29 @@ export const CarPost = ({
           </div>
 
           <div className="flex space-x-2">
+            {dealership.whatsapp && (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleWhatsAppClick}
+                className="text-green-600 border-green-600 hover:bg-green-50"
+              >
+                <MessageSquare className="w-4 h-4 mr-1" />
+                WhatsApp
+              </Button>
+            )}
+            
+            {onApply && (
+              <Button 
+                variant="orange-outline" 
+                size="sm" 
+                onClick={onApply}
+              >
+                <FileText className="w-4 h-4 mr-1" />
+                Apply
+              </Button>
+            )}
+            
             <Button variant="orange-outline" size="sm" onClick={onFinance}>
               Finance
             </Button>

@@ -5,6 +5,7 @@ import { CarPost } from '@/components/CarPost';
 import { FinanceCalculator } from '@/components/FinanceCalculator';
 import { BookingModal } from '@/components/BookingModal';
 import { WriteReviewModal } from '@/components/reviews/WriteReviewModal';
+import { ApplicationModal } from '@/components/applications/ApplicationModal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, Users, Car, Star } from 'lucide-react';
@@ -27,10 +28,15 @@ const Index = () => {
     car?: any;
     dealership?: any;
   }>({ isOpen: false });
+  const [applicationModal, setApplicationModal] = useState<{
+    isOpen: boolean;
+    car?: any;
+    dealership?: any;
+  }>({ isOpen: false });
   const [searchQuery, setSearchQuery] = useState('');
   const [appliedFilters, setAppliedFilters] = useState<any>(null);
 
-  // Sample car data with ratings
+  // Sample car data with WhatsApp numbers
   const carPosts = [
     {
       id: '1',
@@ -38,6 +44,7 @@ const Index = () => {
         name: 'Premium Motors JHB',
         location: 'Sandton, Johannesburg',
         verified: true,
+        whatsapp: '+27123456789', // Add WhatsApp number
       },
       car: {
         make: 'BMW',
@@ -62,6 +69,7 @@ const Index = () => {
         name: 'Cape Town Luxury Cars',
         location: 'V&A Waterfront, Cape Town',
         verified: true,
+        whatsapp: '+27987654321',
       },
       car: {
         make: 'Mercedes-Benz',
@@ -86,6 +94,7 @@ const Index = () => {
         name: 'Pretoria Auto Elite',
         location: 'Menlyn, Pretoria',
         verified: false,
+        whatsapp: '+27111222333',
       },
       car: {
         make: 'Audi',
@@ -177,6 +186,14 @@ const Index = () => {
 
   const handleWriteReview = (car: any, dealership: any) => {
     setReviewModal({
+      isOpen: true,
+      car,
+      dealership,
+    });
+  };
+
+  const handleApply = (car: any, dealership: any) => {
+    setApplicationModal({
       isOpen: true,
       car,
       dealership,
@@ -317,6 +334,7 @@ const Index = () => {
                 onBook={() => handleBooking(post.car, post.dealership)}
                 onFinance={() => handleFinance(post.car)}
                 onWriteReview={() => handleWriteReview(post.car, post.dealership)}
+                onApply={() => handleApply(post.car, post.dealership)}
               />
             ))}
           </div>
@@ -347,6 +365,14 @@ const Index = () => {
         onClose={() => setReviewModal({ isOpen: false })}
         car={reviewModal.car}
         dealership={reviewModal.dealership}
+      />
+
+      {/* Application Modal */}
+      <ApplicationModal
+        isOpen={applicationModal.isOpen}
+        onClose={() => setApplicationModal({ isOpen: false })}
+        car={applicationModal.car}
+        dealership={applicationModal.dealership}
       />
     </div>
   );

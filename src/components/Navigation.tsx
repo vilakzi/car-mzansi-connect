@@ -82,7 +82,7 @@ export const Navigation = ({ onSearchChange, onShowCalculator, onFiltersChange }
               </div>
             </div>
 
-            {/* Navigation Links */}
+            {/* Navigation Links - Always visible */}
             <div className="hidden md:flex items-center space-x-6">
               <Button variant="ghost" className="text-foreground hover:text-orange">
                 Browse Cars
@@ -99,7 +99,7 @@ export const Navigation = ({ onSearchChange, onShowCalculator, onFiltersChange }
               </Button>
             </div>
 
-            {/* Search Bar */}
+            {/* Search Bar - Always visible */}
             {!isMobile && (
               <div className="flex-1 max-w-md mx-8">
                 <div className="relative flex items-center space-x-2">
@@ -135,6 +135,7 @@ export const Navigation = ({ onSearchChange, onShowCalculator, onFiltersChange }
 
             {/* Action Buttons */}
             <div className="flex items-center space-x-3">
+              {/* Post Car Button - only show for logged in users */}
               {!isMobile && user && (
                 <Button variant="orange" size="sm">
                   <Plus className="w-4 h-4 mr-2" />
@@ -155,7 +156,7 @@ export const Navigation = ({ onSearchChange, onShowCalculator, onFiltersChange }
                 </Button>
               )}
 
-              {/* Authentication */}
+              {/* Authentication - Optional */}
               {user ? (
                 <UserDropdown />
               ) : (
